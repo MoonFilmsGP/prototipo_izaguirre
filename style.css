@@ -32,7 +32,7 @@ body {
 
 .game-container {
     width: 100%;
-    max-width: 900px;
+    max-width: 1200px;
     height: 100vh;
     display: flex;
     flex-direction: column;
@@ -68,9 +68,24 @@ header p {
     position: relative;
 }
 
+.item-card {
+    position: absolute;
+    background: var(--card-bg);
+    backdrop-filter: blur(10px);
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    text-align: center;
+    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+/* Base carousel structure (sizes overridden per wrapper) */
 .carousel-wrapper {
     position: relative;
-    height: 220px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -81,15 +96,12 @@ header p {
     align-items: center;
     justify-content: center;
     width: 100%;
-    height: 160px;
     position: relative;
     perspective: 1000px;
 }
 
 .selection-indicator {
     position: absolute;
-    width: 140px;
-    height: 180px;
     border: 2px solid var(--accent);
     border-radius: 16px;
     top: 50%;
@@ -101,6 +113,53 @@ header p {
     transition: all 0.3s ease;
 }
 
+/* TOP WRAPPER (Prendas) */
+.top-wrapper { height: 260px; }
+.top-wrapper .carousel { height: 200px; }
+.top-wrapper .selection-indicator { width: 220px; height: 220px; }
+.top-wrapper .item-card { width: 200px; height: 200px; }
+.top-wrapper .item-card.active { transform: translateX(0) scale(1) translateZ(0); z-index: 5; opacity: 1; }
+.top-wrapper .item-card.prev { transform: translateX(-240px) scale(0.6) translateZ(-50px); z-index: 4; opacity: 0.6; }
+.top-wrapper .item-card.next { transform: translateX(240px) scale(0.6) translateZ(-50px); z-index: 4; opacity: 0.6; }
+.top-wrapper .item-card.hidden-left { transform: translateX(-400px) scale(0.4) translateZ(-100px); z-index: 3; opacity: 0; }
+.top-wrapper .item-card.hidden-right { transform: translateX(400px) scale(0.4) translateZ(-100px); z-index: 3; opacity: 0; }
+
+/* BOTTOM WRAPPER (Fichas) */
+.bottom-wrapper { height: 500px; margin-top: -2rem; }
+.bottom-wrapper .carousel { height: 460px; }
+.bottom-wrapper .selection-indicator { width: 520px; height: 480px; }
+.bottom-wrapper .item-card { width: 500px; height: 460px; }
+.bottom-wrapper .item-card.active { transform: translateX(0) scale(1) translateZ(0); z-index: 5; opacity: 1; }
+.bottom-wrapper .item-card.prev { transform: translateX(-420px) scale(0.4) translateZ(-50px); z-index: 4; opacity: 0.6; }
+.bottom-wrapper .item-card.next { transform: translateX(420px) scale(0.4) translateZ(-50px); z-index: 4; opacity: 0.6; }
+.bottom-wrapper .item-card.hidden-left { transform: translateX(-700px) scale(0.2) translateZ(-100px); z-index: 3; opacity: 0; }
+.bottom-wrapper .item-card.hidden-right { transform: translateX(700px) scale(0.2) translateZ(-100px); z-index: 3; opacity: 0; }
+
+
+.item-card .icon-container {
+    font-size: 8rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    filter: drop-shadow(0 4px 6px rgba(0,0,0,0.3));
+}
+
+.image-container {
+    width: 100%;
+    height: 100%;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+/* Success/Error modifiers */
 .selection-indicator.success {
     border-color: var(--success);
     box-shadow: 0 0 30px rgba(16, 185, 129, 0.6);
@@ -109,82 +168,6 @@ header p {
 .selection-indicator.error {
     border-color: var(--error);
     box-shadow: 0 0 30px rgba(239, 68, 68, 0.6);
-}
-
-.item-card {
-    position: absolute;
-    width: 120px;
-    height: 160px;
-    background: var(--card-bg);
-    backdrop-filter: blur(10px);
-    border: 1px solid var(--card-border);
-    border-radius: 12px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 1rem;
-    text-align: center;
-    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
-    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-}
-
-.item-card .icon {
-    font-size: 3rem;
-    margin-bottom: 0.5rem;
-    filter: drop-shadow(0 4px 6px rgba(0,0,0,0.3));
-}
-
-.image-container {
-    width: 100%;
-    height: 90px;
-    margin-bottom: 0.5rem;
-    border-radius: 8px;
-    overflow: hidden;
-    background: #000;
-}
-
-.image-container img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.item-card .name {
-    font-size: 0.85rem;
-    font-weight: 600;
-    color: var(--text-main);
-}
-
-/* 3D Carousel Positioning Classes */
-.item-card.active {
-    transform: translateX(0) scale(1) translateZ(0);
-    z-index: 5;
-    opacity: 1;
-}
-
-.item-card.prev {
-    transform: translateX(-140px) scale(0.8) translateZ(-50px);
-    z-index: 4;
-    opacity: 0.6;
-}
-
-.item-card.next {
-    transform: translateX(140px) scale(0.8) translateZ(-50px);
-    z-index: 4;
-    opacity: 0.6;
-}
-
-.item-card.hidden-left {
-    transform: translateX(-240px) scale(0.6) translateZ(-100px);
-    z-index: 3;
-    opacity: 0;
-}
-
-.item-card.hidden-right {
-    transform: translateX(240px) scale(0.6) translateZ(-100px);
-    z-index: 3;
-    opacity: 0;
 }
 
 .action-area {

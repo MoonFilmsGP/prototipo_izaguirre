@@ -44,13 +44,10 @@ function renderCarousel(container, items, currentIndex, isTop) {
         el.className = 'item-card';
         
         let visualContent = item.img 
-            ? `<div class="image-container"><img src="${item.img}" alt="${item.name}"></div>`
-            : `<div class="icon">${item.icon}</div>`;
+            ? `<div class="image-container"><img src="${item.img}" alt=""></div>`
+            : `<div class="icon-container">${item.icon}</div>`;
 
-        el.innerHTML = `
-            ${visualContent}
-            <div class="name">${item.name}</div>
-        `;
+        el.innerHTML = visualContent;
 
         // Calculate relative position considering circularity
         let diff = i - currentIndex;
