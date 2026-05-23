@@ -7,11 +7,11 @@ const clothesData = [
 ];
 
 const postersData = [
-    { id: 3, name: "Ficha: Buscando a Juan (Reloj)", icon: "📄" },
-    { id: 1, name: "Ficha: Buscando a Maria (Chamarra)", icon: "📄" },
-    { id: 5, name: "Ficha: Buscando a Luis (Mochila)", icon: "📄" },
-    { id: 2, name: "Ficha: Buscando a Ana (Tenis)", icon: "📄" },
-    { id: 4, name: "Ficha: Buscando a Carlos (Gorra)", icon: "📄" }
+    { id: 3, name: "Brenda Bautista", img: "ROSTROS/BRENDA-BAUTISTA-PINEDA.jpeg" },
+    { id: 1, name: "Abraham Gomez", img: "ROSTROS/ABRAHAM-GOMEZ-MOSQUEDA.jpeg" },
+    { id: 5, name: "Dulce Velazquez", img: "ROSTROS/DULCE-VELAZQUEZ-PEREZ.jpeg" },
+    { id: 2, name: "Bartola Castaneda", img: "ROSTROS/BARTOLA-CASTANEDA-PEREZ.jpeg" },
+    { id: 4, name: "Carlos Daniel", img: "ROSTROS/CARLOS-DANIEL-DOMINGUEZ-PEREZ.jpg" }
 ];
 
 let topItems = [...clothesData];
@@ -42,8 +42,13 @@ function renderCarousel(container, items, currentIndex, isTop) {
     items.forEach((item, i) => {
         const el = document.createElement('div');
         el.className = 'item-card';
+        
+        let visualContent = item.img 
+            ? `<div class="image-container"><img src="${item.img}" alt="${item.name}"></div>`
+            : `<div class="icon">${item.icon}</div>`;
+
         el.innerHTML = `
-            <div class="icon">${item.icon}</div>
+            ${visualContent}
             <div class="name">${item.name}</div>
         `;
 
