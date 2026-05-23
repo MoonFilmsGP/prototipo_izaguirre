@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minijuego: Rancho Izaguirre</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="game-container">
+        <header>
+            <h1>Rancho Izaguirre</h1>
+            <p>Relaciona las prendas con las fichas de búsqueda</p>
+        </header>
+
+        <main class="play-area">
+            <!-- Top Carousel (Prendas) -->
+            <div class="carousel-wrapper top-wrapper">
+                <div class="controls-hint">Teclas: <span class="key">A</span> <span class="key">D</span></div>
+                <div class="carousel" id="top-carousel">
+                    <!-- Items injected by JS -->
+                </div>
+                <div class="selection-indicator"></div>
+            </div>
+
+            <!-- Action Area -->
+            <div class="action-area">
+                <div class="match-status" id="match-status"></div>
+                <div class="controls-hint action-hint">Presiona <span class="key space-key">ESPACIO</span> para relacionar</div>
+            </div>
+
+            <!-- Bottom Carousel (Fichas) -->
+            <div class="carousel-wrapper bottom-wrapper">
+                <div class="selection-indicator"></div>
+                <div class="carousel" id="bottom-carousel">
+                    <!-- Items injected by JS -->
+                </div>
+                <div class="controls-hint">Teclas: <span class="key">←</span> <span class="key">→</span></div>
+            </div>
+        </main>
+
+        <div id="victory-screen" class="hidden">
+            <h2>Todas las evidencias han sido procesadas</h2>
+            <p>Gracias por tu labor.</p>
+            <button onclick="location.reload()">Reiniciar</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
